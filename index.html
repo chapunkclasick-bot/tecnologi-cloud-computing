@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perpustakaan Online - Digital Library</title>
+    <meta name="description" content="Website perpustakaan digital untuk mengelola koleksi buku online">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-book"></i>
+                    Perpustakaan Online
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link active" data-page="home">Beranda</a></li>
+                    <li><a href="#" class="nav-link" data-page="collection">Koleksi Buku</a></li>
+                    <li><a href="#" class="nav-link" data-page="about">Tentang</a></li>
+                    <li><a href="#" class="nav-link" data-page="contact">Kontak</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="mobile-nav" id="mobileNav">
+            <ul class="mobile-nav-links">
+                <li><a href="#" class="nav-link active" data-page="home">Beranda</a></li>
+                <li><a href="#" class="nav-link" data-page="collection">Koleksi Buku</a></li>
+                <li><a href="#" class="nav-link" data-page="about">Tentang</a></li>
+                <li><a href="#" class="nav-link" data-page="contact">Kontak</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="heroSection">
+        <div class="container">
+            <h1>Selamat Datang di Perpustakaan Digital</h1>
+            <p>Temukan dan kelola koleksi buku digital Anda dengan mudah di satu tempat</p>
+            <a href="#" class="btn btn-outline" id="ctaButton">Jelajahi Koleksi</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Home Page -->
+            <div class="page active" id="homePage">
+                <!-- Statistics -->
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-books">0</div>
+                        <div class="stat-label">Total Buku</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="available-books">0</div>
+                        <div class="stat-label">Tersedia</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="borrowed-books">0</div>
+                        <div class="stat-label">Dipinjam</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="categories-count">0</div>
+                        <div class="stat-label">Kategori</div>
+                    </div>
+                </div>
+
+                <!-- Form Tambah Buku -->
+                <div class="form-container">
+                    <div class="section-title">
+                        <h2>Tambah Buku Baru</h2>
+                    </div>
+                    <form id="book-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="book-title">Judul Buku *</label>
+                                <input type="text" id="book-title" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="book-author">Penulis *</label>
+                                <input type="text" id="book-author" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="book-year">Tahun Terbit</label>
+                                <input type="number" id="book-year" class="form-control" min="1900" max="2030">
+                            </div>
+                            <div class="form-group">
+                                <label for="book-category">Kategori</label>
+                                <select id="book-category" class="form-control">
+                                    <option value="">Pilih Kategori</option>
+                                    <option value="Fiksi">Fiksi</option>
+                                    <option value="Non-Fiksi">Non-Fiksi</option>
+                                    <option value="Sains">Sains</option>
+                                    <option value="Teknologi">Teknologi</option>
+                                    <option value="Sejarah">Sejarah</option>
+                                    <option value="Biografi">Biografi</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="book-description">Deskripsi</label>
+                            <textarea id="book-description" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="book-status">Status</label>
+                            <select id="book-status" class="form-control">
+                                <option value="Tersedia">Tersedia</option>
+                                <option value="Dipinjam">Dipinjam</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Tambah Buku</button>
+                    </form>
+                </div>
+
+                <!-- Recent Books -->
+                <div class="section-title">
+                    <h2>Buku Terbaru</h2>
+                    <a href="#" class="btn btn-outline nav-link" data-page="collection">Lihat Semua</a>
+                </div>
+                
+                <div class="books-grid" id="recent-books-container">
+                    <!-- Buku terbaru akan ditampilkan di sini oleh JavaScript -->
+                </div>
+            </div>
+
+            <!-- Collection Page -->
+            <div class="page" id="collectionPage">
+                <div class="section-title">
+                    <h2>Koleksi Buku</h2>
+                    <span id="book-count">0 buku</span>
+                </div>
+
+                <!-- Filter & Search -->
+                <div class="filter-container">
+                    <div class="search-box">
+                        <input type="text" id="search-input" class="form-control" placeholder="Cari judul atau penulis...">
+                    </div>
+                    <select id="category-filter" class="form-control">
+                        <option value="">Semua Kategori</option>
+                        <option value="Fiksi">Fiksi</option>
+                        <option value="Non-Fiksi">Non-Fiksi</option>
+                        <option value="Sains">Sains</option>
+                        <option value="Teknologi">Teknologi</option>
+                        <option value="Sejarah">Sejarah</option>
+                        <option value="Biografi">Biografi</option>
+                    </select>
+                    <select id="status-filter" class="form-control">
+                        <option value="">Semua Status</option>
+                        <option value="Tersedia">Tersedia</option>
+                        <option value="Dipinjam">Dipinjam</option>
+                    </select>
+                </div>
+                
+                <div class="books-grid" id="books-container">
+                    <!-- Buku akan ditampilkan di sini oleh JavaScript -->
+                </div>
+            </div>
+
+            <!-- About Page -->
+            <div class="page" id="aboutPage">
+                <div class="section-title">
+                    <h2>Tentang Perpustakaan Online</h2>
+                </div>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Misi Kami</h2>
+                        <p>Perpustakaan Online didirikan dengan tujuan untuk menyediakan akses mudah terhadap koleksi buku digital bagi seluruh masyarakat. Kami percaya bahwa pengetahuan harus dapat diakses oleh siapa saja, kapan saja, dan di mana saja.</p>
+                        
+                        <p>Dengan platform digital ini, kami menghadirkan pengalaman membaca yang modern dan interaktif, sekaligus memudahkan pengelolaan koleksi buku pribadi maupun komunitas.</p>
+                        
+                        <div class="about-features">
+                            <h3>Fitur Unggulan</h3>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check"></i> Katalog buku digital yang lengkap</li>
+                                <li><i class="fas fa-check"></i> Sistem peminjaman buku yang mudah</li>
+                                <li><i class="fas fa-check"></i> Pencarian buku yang cepat dan akurat</li>
+                                <li><i class="fas fa-check"></i> Manajemen koleksi pribadi</li>
+                                <li><i class="fas fa-check"></i> Akses 24/7 dari berbagai device</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="about-image">
+                        <div class="about-placeholder">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Page -->
+            <div class="page" id="contactPage">
+                <div class="section-title">
+                    <h2>Hubungi Kami</h2>
+                </div>
+                
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Informasi Kontak</h3>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Alamat</strong>
+                                <p>Jl. Perpustakaan No. 123, Jakarta</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Telepon</strong>
+                                <p>(021) 1234-5678</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email</strong>
+                                <p>info@perpustakaanonline.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Jam Operasional</strong>
+                                <p>Senin - Jumat: 08:00 - 17:00</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-container">
+                        <h3>Kirim Pesan</h3>
+                        <form id="contact-form">
+                            <div class="form-group">
+                                <label for="contact-name">Nama Lengkap</label>
+                                <input type="text" id="contact-name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Email</label>
+                                <input type="email" id="contact-email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-subject">Subjek</label>
+                                <input type="text" id="contact-subject" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message">Pesan</label>
+                                <textarea id="contact-message" class="form-control" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Perpustakaan Online. All rights reserved.</p>
+                <p>Dibuat dengan <i class="fas fa-heart"></i> untuk pecinta buku</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>
